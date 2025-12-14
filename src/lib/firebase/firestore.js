@@ -67,9 +67,8 @@ export async function addReviewToRestaurant(db, restaurantId, review) {
       collection(db, `restaurants/${restaurantId}/ratings`)
     );
 
-    // corrected line
     await runTransaction(db, async (transaction) => {
-      updateWithRating(transaction, docRef, newRatingDocument, review);
+      await updateWithRating(transaction, docRef, newRatingDocument, review);
     });
   } catch (error) {
     console.error(
